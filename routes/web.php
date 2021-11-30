@@ -34,7 +34,9 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
     Route::get('user-logout',[HomeController::class,'logout'])->name('logout');
     Route::get('user-profile/delete/{id}',[UserSettingController::class,'destroy'])->name('user-profile.destroy');
     Route::resource('user-profile',UserSettingController::class)->except('destroy');
+    // permission routes
     Route::get('permission/create/{id}',[UserPermissionController::class,'create'])->name('permission.create');
     Route::get('permission/delete/{id}',[UserPermissionController::class,'destroy'])->name('permission.destroy');
     Route::resource('permission',UserPermissionController::class)->except('destroy','create');
+    Route::match(['put','patch'],'user/assigned-permissions/update/{userID}',[UserPermissionController::class,'permissionUpdate'])->name('permission.user.update');
 });

@@ -22,7 +22,7 @@ class UserPermissionController extends Controller
         try {
             $permissions = Permission::all();
             $user = User::find($id);
-            return view('backend.content.user.create',compact('permissions','user'));
+            return view('backend.content.user.permissionCreate',compact('permissions','user'));
         } catch (\Throwable $th) {
             //throw $th;
         }
@@ -70,5 +70,13 @@ class UserPermissionController extends Controller
         } catch (\Throwable $th) {
             return $th->getMessage();
         }
+    }
+
+    public function permissionUpdate(Request $request,$userID){
+        // return $request;
+        $user = User::find($userID);
+        $user->syncPermissions($request->permissions);
+        toast('Permissions updates successfully','success');
+        return redirect()->back();
     }
 }

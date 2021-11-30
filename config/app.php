@@ -166,6 +166,7 @@ return [
          * Package Service Providers...
          */
         OwenIt\Auditing\AuditingServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
         /*
          * Application Service Providers...
          */
