@@ -39,4 +39,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
     Route::get('permission/delete/{id}',[UserPermissionController::class,'destroy'])->name('permission.destroy');
     Route::resource('permission',UserPermissionController::class)->except('destroy','create');
     Route::match(['put','patch'],'user/assigned-permissions/update/{userID}',[UserPermissionController::class,'permissionUpdate'])->name('permission.user.update');
+    // Audits
+    Route::get('user/audits/index',[UserSettingController::class,'auditSettings'])->name('audit.index');
+    Route::post('user/audits/get',[UserSettingController::class,'getAudits'])->name('audit.get');
 });

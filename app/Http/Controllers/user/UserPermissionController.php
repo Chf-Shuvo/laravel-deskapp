@@ -14,7 +14,7 @@ class UserPermissionController extends Controller
             $permissions = Permission::orderBy('name')->get();
             return view('backend.content.user.permission',compact('permissions'));
         } catch (\Throwable $th) {
-            throw $th;
+            return $th->getMessage();
         }
     }
 
@@ -24,7 +24,7 @@ class UserPermissionController extends Controller
             $user = User::find($id);
             return view('backend.content.user.permissionCreate',compact('permissions','user'));
         } catch (\Throwable $th) {
-            //throw $th;
+            return $th->getMessage();
         }
     }
 
@@ -36,7 +36,7 @@ class UserPermissionController extends Controller
             toast('Permission Created!','success');
             return redirect()->back();
         } catch (\Throwable $th) {
-            throw $th;
+            return $th->getMessage();
         }
     }
 
@@ -74,9 +74,13 @@ class UserPermissionController extends Controller
 
     public function permissionUpdate(Request $request,$userID){
         // return $request;
-        $user = User::find($userID);
-        $user->syncPermissions($request->permissions);
-        toast('Permissions updates successfully','success');
-        return redirect()->back();
+        try {
+            $user = User::find($userID);
+            $user->syncPermissions($request->permissions);
+            toast('Permissions updates successfully','success');
+            return redirect()->back();
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
     }
 }

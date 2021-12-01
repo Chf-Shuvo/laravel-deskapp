@@ -34,7 +34,9 @@
 
 	<div class="main-container">
 		<div class="pd-ltr-20">
-            @yield('content')
+			<div class="card-box pd-20 height-100-p mb-30">
+				@yield('content')
+			</div>
 		</div>
 	</div>
 	<!-- js -->

@@ -22,11 +22,11 @@ $('document').ready(function(){
 		scrollCollapse: true,
 		autoWidth: false,
 		responsive: true,
+		pageLength: 15,
 		columnDefs: [{
 			targets: "datatable-nosort",
 			orderable: false,
 		}],
-		"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
 		"language": {
 			"info": "_START_-_END_ of _TOTAL_ entries",
 			searchPlaceholder: "Search",
@@ -37,7 +37,7 @@ $('document').ready(function(){
 		},
 		dom: 'Bfrtp',
 		buttons: [
-		'copy', 'csv', 'pdf', 'print'
+			'copy', 'csv', 'pdf', 'print'
 		]
 	});
 

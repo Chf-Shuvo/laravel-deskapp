@@ -8,63 +8,60 @@
 
 @section('content')
     @if (Request::routeIs('permission.index'))
-        <div class="card-box pd-20 height-100-p mb-30">
-            <div class="row align-items-center">
-                <div class="col-md-12">
-                    <a href="javascript:void(0)" class="btn btn-info btn-md float-right" data-toggle="modal" data-target="#userModal"><i class="icon-copy dw dw-add"></i> add new</a>
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <a href="javascript:void(0)" class="btn btn-info btn-md float-right" data-toggle="modal" data-target="#userModal"><i class="icon-copy dw dw-add"></i> add new</a>
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title"><i class="icon-copy dw dw-add"></i> Add New Permission</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="{{ route('permission.store') }}" method="post">
-                                    @csrf
-                                        <div class="form-row">
-                                            <div class="form-group col-md-12">
-                                            <label for="">Permission:</label>
-                                            <input type="text" name="name" class="form-control" data-validation="required">
-                                            <small class="text-info">Use: [read-] | [add-] | [edit-] | [delete-] prefix before every permission</small>
-                                            </div>
-                                            <div class="form-group col-md-12">
-                                            <button type="submit" class="btn btn-success btn-md float-right"><i class="icon-copy dw dw-add"></i> add</button>
-                                            </div>
+                <!-- Modal -->
+                <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title"><i class="icon-copy dw dw-add"></i> Add New Permission</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{ route('permission.store') }}" method="post">
+                                @csrf
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                        <label for="">Permission:</label>
+                                        <input type="text" name="name" class="form-control" data-validation="required">
+                                        <small class="text-info">Use: [read-] | [add-] | [edit-] | [delete-] prefix before every permission</small>
                                         </div>
-                                    </form>
-                                </div>
+                                        <div class="form-group col-md-12">
+                                        <button type="submit" class="btn btn-success btn-md float-right"><i class="icon-copy dw dw-add"></i> add</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12 mt-3">
-                    <table class="data-table table stripe hover nowrap">
-                        <thead>
+            </div>
+            <div class="col-md-12 mt-3">
+                <table class="data-table table stripe hover nowrap">
+                    <thead>
+                        <tr>
+                            <th class="table-plus datatable-nosort">Name</th>
+                            <th class="datatable-nosort">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($permissions as $item)
                             <tr>
-                                <th class="table-plus datatable-nosort">Name</th>
-                                <th class="datatable-nosort">Action</th>
+                                <td class="table-plus">{{ $item->name }}</td>
+                                <td>
+                                    <a href="{{ route('permission.edit',$item->id) }}" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="permission-edit"><i class="icon-copy dw dw-edit2"></i></a>
+                                    <a href="{{ route('permission.destroy',$item->id) }}" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="permission-delete" onclick="return confirm('Are you sure to remove this permission?')"><i class="icon-copy dw dw-delete-3"></i></a>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($permissions as $item)
-                                <tr>
-                                    <td class="table-plus">{{ $item->name }}</td>
-                                    <td>
-                                        <a href="{{ route('permission.edit',$item->id) }}" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="permission-edit"><i class="icon-copy dw dw-edit2"></i></a>
-                                        <a href="{{ route('permission.destroy',$item->id) }}" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="permission-delete" onclick="return confirm('Are you sure to remove this permission?')"><i class="icon-copy dw dw-delete-3"></i></a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     @else
-    <div class="card-box pd-20 height-100-p mb-30">
         <div class="row align-items-center">
             <div class="col-md-12">
                 <form action="{{ route('permission.update',$permission->id) }}" method="post">
@@ -83,7 +80,6 @@
                 </form>
             </div>
         </div>
-    </div>
     @endif
 @endsection
 

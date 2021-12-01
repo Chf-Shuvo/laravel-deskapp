@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\user;
 
+use Carbon\Carbon;
 use App\Models\User;
+use App\Models\AppAudit;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 
 class UserSettingController extends Controller
@@ -66,6 +69,39 @@ class UserSettingController extends Controller
             User::destroy($id);
             toast('User deleted successfully','success');
             return redirect()->back();
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
+    public function auditSettings(){
+        try {
+            $models = [];
+            $modelsPath = app_path('Models');
+            $modelFiles = File::allFiles($modelsPath);
+            foreach ($modelFiles as $modelFile) {
+                $models[] = $modelFile->getFilenameWithoutExtension();
+            }
+        
+            return view('backend.content.audit.index', compact('models'));
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
+    public function getAudits(Request $request){
+        try {
+            // return $request;
+            $startDate = Carbon::parse($request->from)->format('Y-m-d');
+            $endDate = Carbon::parse($request->to)->format('Y-m-d');
+            $model = "App\\Models\\".$request->model;
+            $audits = AppAudit::with('user:id,name')
+                    ->where('auditable_type',$model)
+                    ->whereBetween('created_at', [$startDate, $endDate])
+                    ->get();
+            $model = $request->model;
+            // return $audits;
+            return view('backend.content.audit.index', compact('audits','model'));
         } catch (\Throwable $th) {
             return $th->getMessage();
         }

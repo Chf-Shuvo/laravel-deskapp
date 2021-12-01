@@ -5,42 +5,40 @@
 @endpush
 
 @section('content')
-    <div class="card-box pd-20 height-100-p mb-30">
-        <div class="row align-items-center">
-            <div class="col-md-12">
-                <form action="{{ route('user-profile.update',auth()->user()->id) }}" method="post" enctype="multipart/form-data">
-                    @csrf
-                    @method("PATCH")
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                          <label for="">User Name:</label>
-                          <input type="text" name="name" class="form-control" value="{{ $user->name }}" data-validation="required">
-                        </div>
-                        <div class="form-group col-md-4">
-                          <label for="">User Email:</label>
-                          <input type="email" name="email" class="form-control" value="{{ $user->email }}" data-validation="required">
-                        </div>
-                        <div class="form-group col-md-4">
-                          <label for="">User Contact:</label>
-                          <input type="text" name="phone" class="form-control" value="{{ $user->phone }}" data-validation="number">
-                        </div>
-                        <div class="form-group col-md-6">
-                          <label for="">Password:</label>
-                          <input type="password" name="password" class="form-control" data-validation="required">
-                        </div>
-                        <div class="form-group col-md-6">
-                          <label for="">Confirm Password:</label>
-                          <input type="password" name="confirmPassword" class="form-control" data-validation="required">
-                          <div class="pt-2" id="confirmationMessage">
-                            
-                          </div>
-                        </div>
-                        <div class="form-group col-md-12">
-                          <button type="submit" class="btn btn-success float-right">update</button>
-                        </div>
+    <div class="row align-items-center">
+        <div class="col-md-12">
+            <form action="{{ route('user-profile.update',auth()->user()->id) }}" method="post" enctype="multipart/form-data">
+                @csrf
+                @method("PATCH")
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                    <label for="">User Name:</label>
+                    <input type="text" name="name" class="form-control" value="{{ $user->name }}" data-validation="required">
                     </div>
-                </form>
-            </div>
+                    <div class="form-group col-md-4">
+                    <label for="">User Email:</label>
+                    <input type="email" name="email" class="form-control" value="{{ $user->email }}" data-validation="required">
+                    </div>
+                    <div class="form-group col-md-4">
+                    <label for="">User Contact:</label>
+                    <input type="text" name="phone" class="form-control" value="{{ $user->phone }}" data-validation="number">
+                    </div>
+                    <div class="form-group col-md-6">
+                    <label for="">Password:</label>
+                    <input type="password" name="password" class="form-control" data-validation="required">
+                    </div>
+                    <div class="form-group col-md-6">
+                    <label for="">Confirm Password:</label>
+                    <input type="password" name="confirmPassword" class="form-control" data-validation="required">
+                    <div class="pt-2" id="confirmationMessage">
+                        
+                    </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                    <button type="submit" class="btn btn-success float-right">update</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 @endsection

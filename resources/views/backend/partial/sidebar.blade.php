@@ -23,6 +23,7 @@
                     <ul class="submenu">
                         <li><a href="{{ route('user-profile.index') }}">Users</a></li>
                         <li><a href="{{ route('permission.index') }}">Access Control List</a></li>
+                        <li><a href="{{ route('audit.index') }}">Check Audtis</a></li>
                     </ul>
                 </li>
                 <li>
