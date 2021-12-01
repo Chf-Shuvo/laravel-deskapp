@@ -21,9 +21,15 @@
                         <span class="micon dw dw-settings2"></span><span class="mtext">Settings</span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="{{ route('user-profile.index') }}">Users</a></li>
-                        <li><a href="{{ route('permission.index') }}">Access Control List</a></li>
-                        <li><a href="{{ route('audit.index') }}">Check Audtis</a></li>
+                        <li>
+                            <a href="{{ route('user-profile.index') }}" class="{{ Request::routeIs('user-profile.*') ? 'active':''}}">Users</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('permission.index') }}" class="{{ Request::routeIs('permission.*') ? 'active':''}}">Access Control List</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('audit.index') }}" class="{{ Request::routeIs('audit.*') ? 'active':''}}">Check Audtis</a>
+                        </li>
                     </ul>
                 </li>
                 <li>
